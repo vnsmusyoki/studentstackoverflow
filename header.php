@@ -23,14 +23,14 @@
 
                                 </li>
                                 <li class="is-mega-menu">
-                                    <a href="#">Posts </a>
+                                    <a href="posts.php">Posts </a>
 
                                 </li>
                                 <li>
-                                    <a href="#">Categories </a>
+                                    <a href="ask-question.php">Questions </a>
                                 </li>
                                 <li>
-                                    <a href="#">My  Account </a>
+                                    <a href="profile.php">My  Account </a>
                                 </li>
                                  
                             </ul><!-- end ul -->
@@ -59,15 +59,15 @@
 
                 </li>
                 <li>
-                    <a href="#">Posts</a>
+                    <a href="posts.php">Posts</a>
 
                 </li>
                 <li>
-                    <a href="#">Categories</a>
+                    <a href="ask-question.php">Questions</a>
 
                 </li>
                 <li>
-                    <a href="#">My Account </a>
+                    <a href="profile.php">My Account </a>
                 </li>
                  
             </ul>
