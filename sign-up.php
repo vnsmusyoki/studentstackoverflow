@@ -41,6 +41,11 @@
     <section class="sign-up-area pt-80px pb-80px position-relative">
         <div class="container">
             <form action="#" class="card card-item" method="POST" autocomplete="off">
+            <?php
+                            if (isset($_POST['sign-up-btn'])) {
+                                require 'sign-up-validate.php';
+                            }
+                            ?>
                 <div class="card-body row p-0">
                     <div class="col-lg-6">
                         <div class="form-content p-5 h-100 d-flex align-items-center justify-content-center flex-column bg-diagonal-gradient-primary-2 radius-top-left-8 radius-bottom-left-8 text-left">
@@ -88,15 +93,15 @@
                             </div>
                             <div class="form-group">
                                 <label class="fs-14 text-black fw-medium lh-18">Display name</label>
-                                <input type="email" name="full_name" value="<?php echo $full_name; ?>" class="form-control form--control" placeholder="Enter name">
+                                <input type="text" name="full_name" value="<?php echo $full_name; ?>" class="form-control form--control" placeholder="Enter name">
                             </div><!-- end form-group -->
                             <div class="form-group">
                                 <label class="fs-14 text-black fw-medium lh-18">Email</label>
-                                <input type="email" name="email" value="<?php echo $email; ?>" class="form-control form--control" placeholder="Email address">
+                                <input type="text" name="email" value="<?php echo $email; ?>" class="form-control form--control" placeholder="Email address">
                             </div><!-- end form-group -->
                             <div class="form-group">
                                 <label class="fs-14 text-black fw-medium lh-18">Username</label>
-                                <input type="email" name="username" value="<?php echo $username; ?>" class="form-control form--control" placeholder="Username">
+                                <input type="text" name="username" value="<?php echo $username; ?>" class="form-control form--control" placeholder="Username">
                             </div><!-- end form-group -->
                             <div class="form-group">
                                 <label class="fs-14 text-black fw-medium lh-18">Password</label>
@@ -140,11 +145,7 @@
                                 <button id="send-message-btn" name="sign-up-btn" class="btn theme-btn w-100" type="submit">Sign up <i class="la la-arrow-right icon ml-1"></i></button>
 
                             </div><!-- end form-group -->
-                            <?php
-                            if (isset($_POST['sign-up-btn'])) {
-                                require 'sign-up-validate.php';
-                            }
-                            ?>
+                           
                             <?php echo $message; ?>
                         </div><!-- end form-action-wrapper -->
                     </div><!-- end col-lg-5 -->

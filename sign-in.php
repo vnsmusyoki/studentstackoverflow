@@ -1,3 +1,15 @@
+
+<?php $message = $email = $password = ''; ?>
+<?php
+session_start();
+$success = $_GET['acccount'];
+if($success == "success"){
+    $msg = "
+    <script>
+        toastr.success('Account created successfully. Log In to continue.');
+    </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +35,11 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/selectize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/toastr-btn.css">
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
+    <script src="assets/js/toastr-options.js"></script>
     <!-- end inject -->
 </head>
 
@@ -38,6 +55,8 @@
 <section class="login-area pt-80px pb-80px position-relative">
     <div class="shape-bg position-absolute top-0 left-0 w-100 h-100 opacity-2 z-index-n1"></div>
     <div class="container">
+    <?php echo $message; ?>
+    <?php echo $msg; ?>
         <form action="#" class="card card-item login-form">
             <div class="card-body row p-0">
                 <div class="col-lg-6">
