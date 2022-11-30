@@ -41,11 +41,11 @@
     <section class="sign-up-area pt-80px pb-80px position-relative">
         <div class="container">
             <form action="#" class="card card-item" method="POST" autocomplete="off">
-            <?php
-                            if (isset($_POST['sign-up-btn'])) {
-                                require 'sign-up-validate.php';
-                            }
-                            ?>
+                <?php
+                if (isset($_POST['sign-up-btn'])) {
+                    require 'sign-up-validate.php';
+                }
+                ?>
                 <div class="card-body row p-0">
                     <div class="col-lg-6">
                         <div class="form-content p-5 h-100 d-flex align-items-center justify-content-center flex-column bg-diagonal-gradient-primary-2 radius-top-left-8 radius-bottom-left-8 text-left">
@@ -145,7 +145,7 @@
                                 <button id="send-message-btn" name="sign-up-btn" class="btn theme-btn w-100" type="submit">Sign up <i class="la la-arrow-right icon ml-1"></i></button>
 
                             </div><!-- end form-group -->
-                           
+
                             <?php echo $message; ?>
                         </div><!-- end form-action-wrapper -->
                     </div><!-- end col-lg-5 -->

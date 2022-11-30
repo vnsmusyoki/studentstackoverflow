@@ -52,13 +52,9 @@ toastr.error('Incorrect email address. Provide a valid one.');
             $queryadd = $checkadd->execute([$full_name, $username, $password, $email, $category]);
 
             if ($queryadd === true) {
-                $message = "
-            <script>
-                toastr.error('Student Account created successfully');
-            </scrip>";
-
+                
                 echo "<script>
-                                    window.location.replace('sign-in.php?acccount=success');
+                                    window.location.replace('sign-in.php');
                                     </script>";
             } else {
                 $message = "
