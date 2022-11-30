@@ -1,6 +1,6 @@
 <?php
 
-require('student-account.php');
+require('admin-account.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +27,11 @@ require('student-account.php');
     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
     <link rel="stylesheet" href="../css/selectize.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/toastr-btn.css">
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
+    <script src="assets/js/toastr-options.js"></script>
     <!-- end inject -->
 </head>
 
