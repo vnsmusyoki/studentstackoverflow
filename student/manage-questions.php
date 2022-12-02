@@ -109,7 +109,7 @@ $message = $description = $question = $category = '';
                          
                         $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
                         $queryanswers = $conn->prepare($checkanswers);
-                        $queryanswers->execute([$categoryid]);
+                        $queryanswers->execute([$quizid]);
                         $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
                         $answercount = count($queryresult);
                         echo "

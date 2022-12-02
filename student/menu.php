@@ -6,6 +6,9 @@
         <a class="nav-link"  href="post-quiz.php" role="tab" aria-controls="user-activity" aria-selected="false">Post Quiz</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link"  href="manage-questions.php" role="tab" aria-controls="user-activity" aria-selected="false">My Questions</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link"  href="logout.php" role="tab" aria-controls="user-activity" aria-selected="false">Log Out</a>
     </li>
 </ul>

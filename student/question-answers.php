@@ -88,21 +88,19 @@ $message = $description = $question = $category = '';
                 $addstudent = "SELECT * FROM `questions` WHERE `id` = ?";
                 $checkadd = $conn->prepare($addstudent);
                 $checkadd->execute([$question]);
-                $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
-                if (count($result) > 0) {
-                    foreach ($result as $row) {
-                        $quiztitle = $row['question_title'];
-                        $quizid = $row['id'];
-                        $categoryid = $row['category_id'];
-                        $quizdesc = $row['description'];
-                        $quizpostedby = $row['posted_by'];
-                        $quizdate = $row['date_uploaded'];
+                $selectedquiz = $checkadd->fetch();
+                
+                        $quiztitle = $selectedquiz['question_title'];
+                        $quizid = $selectedquiz['id'];
+                        $categoryid = $selectedquiz['category_id'];
+                        $quizdesc = $selectedquiz['description'];
+                        $quizpostedby = $selectedquiz['posted_by'];
+                        $quizdate = $selectedquiz['date_uploaded'];
                         $checkuser = "SELECT * FROM `users` WHERE `id`=?";
                         $queryuser = $conn->prepare($checkuser);
                         $queryuser->execute([$quizpostedby]);
                         $quizresult = $queryuser->fetch();
                         $postedby = $quizresult['full_names'];
-
                         $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                         $querycategory = $conn->prepare($checkcategory);
                         $querycategory->execute([$quizid]);
@@ -111,7 +109,7 @@ $message = $description = $question = $category = '';
 
                         $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
                         $queryanswers = $conn->prepare($checkanswers);
-                        $queryanswers->execute([$categoryid]);
+                        $queryanswers->execute([$question]);
                         $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
                         $answercount = count($queryresult);
                         echo "
@@ -156,6 +154,7 @@ $message = $description = $question = $category = '';
                             foreach ($queryresult as $row) {
                                 $anwer = $row['answer'];
                                 $answeredby  = $row['answered_by'];
+                                $timeanswered  = $row['date_uploaded'];
 
                                 $answeruser = "SELECT * FROM `users` WHERE `id`=?";
                                 $queryansweruser = $conn->prepare($answeruser);
@@ -165,33 +164,31 @@ $message = $description = $question = $category = '';
 
 
                                 echo "
-                                
+                                <div class='col-lg-12'>
+                                <div class='question-main-bar mb-50px'>
                                 <div class='media media-card user-media owner align-items-center'>
-                                <a href='user-profile.html' class='media-img d-block'>
-                                    <img src='images/img3.jpg' alt='avatar'>
+                                <a href='#' class='media-img d-block'>
+                                    <img src='https://ui-avatars.com/api/?name=$answeredname' alt='avatar'>
                                 </a>
-                                <div class='media-body d-flex flex-wrap align-items-center justify-content-between'>
+                                <div class='media-body d-flex flex-column align-items-start justify-content-column'>
                                     <div>
-                                        <h5 class='pb-1'><a href='user-profile.html'>Arden Smith</a></h5>
-                                        <div class='stats fs-12 d-flex align-items-center lh-18'>
-                                            <span class='text-black pr-2'>224,110</span>
-                                            <span class='pr-2 d-inline-flex align-items-center'><span class='ball gold'></span>16</span>
-                                            <span class='pr-2 d-inline-flex align-items-center'><span class='ball silver'></span>93</span>
-                                            <span class='pr-2 d-inline-flex align-items-center'><span class='ball'></span>136</span>
-                                        </div>
+                                        <h5 class='pb-1'><a href='#'>$answeredname</a></h5>
+                                        
                                     </div>
                                     <small class='meta d-block text-right'>
-                                        <span class='text-black d-block lh-18'>asked</span>
-                                        <span class='d-block lh-18 fs-12'>6 hours ago</span>
+                                        
+                                        <span class='d-block lh-18 fs-12'>$timeanswered</span>
                                     </small>
+                                    <p>$anwer</p>
                                 </div>
                             </div>
-                                
+                                </div>
+                                </div>
                                 ";
                             }
                         }
-                    }
-                }
+                    
+                
                 ?>
                 <form method="post" class="card-body" action="">
                     <?php
