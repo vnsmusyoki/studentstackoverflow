@@ -10,14 +10,12 @@ if (!isset($_SESSION['student'])) {
     $user = $stmt->fetch();
     if(empty($user)){
        echo "<script>window.location.replace('../sign-in.php');</script>";
-       
     }else{
         $fullname = $user['full_names'];
         $email = $user['email'];
         $datejoined = $user['date_joined'];
-        global $fullname, $email, $datejoined;
- 
-        
+        $userid = $user['id']; 
+        global $fullname, $email, $datejoined, $userid;
     }
 
     

@@ -3,7 +3,7 @@
 require('student-account.php');
 ?>
 <?php
-$message = $description = $question = $category = ''; 
+$message = $description = $question = $category = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,7 @@ $message = $description = $question = $category = '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Student | Ask Any Quiz</title>
+    <title>Student | My Questions</title>
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -88,7 +88,7 @@ $message = $description = $question = $category = '';
         <span class="stroke-shape stroke-shape-6"></span>
         <div class="container">
             <div class="hero-content pt-80px pb-80px">
-                <h2 class="section-title">Ask a public question</h2>
+                <h2 class="section-title">All Questions</h2>
                 <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 125">
                     <defs>
                         <style>
@@ -197,7 +197,7 @@ $message = $description = $question = $category = '';
                                             foreach ($result as $row) {
 
                                                 $category = $row['category_name'];
-                                                $catid = $row['id']; 
+                                                $catid = $row['id'];
                                                 echo '<option value="' . $catid . '">' . $category . '</option>';
                                             }
                                         }
