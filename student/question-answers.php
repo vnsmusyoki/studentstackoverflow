@@ -83,9 +83,11 @@ $message = $description = $question = $category = '';
         <div class="container">
             <div class="row">
                 <?php
-                $addstudent = "SELECT * FROM `questions` WHERE `posted_by` = ?";
+                $question = $_GET['id'];
+                global $question;
+                $addstudent = "SELECT * FROM `questions` WHERE `id` = ?";
                 $checkadd = $conn->prepare($addstudent);
-                $checkadd->execute([$userid]);
+                $checkadd->execute([$question]);
                 $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
                 if (count($result) > 0) {
                     foreach ($result as $row) {
@@ -147,9 +149,74 @@ $message = $description = $question = $category = '';
                 </div><!-- end col-lg-9 -->
                         
                         ";
+
+
+                        echo "Answers";
+                        if (count($queryresult) > 0) {
+                            foreach ($queryresult as $row) {
+                                $anwer = $row['answer'];
+                                $answeredby  = $row['answered_by'];
+
+                                $answeruser = "SELECT * FROM `users` WHERE `id`=?";
+                                $queryansweruser = $conn->prepare($answeruser);
+                                $queryansweruser->execute([$answeredby]);
+                                $answeuserresult = $queryansweruser->fetch();
+                                $answeredname = $answeuserresult['full_names'];
+
+
+                                echo "
+                                
+                                <div class='media media-card user-media owner align-items-center'>
+                                <a href='user-profile.html' class='media-img d-block'>
+                                    <img src='images/img3.jpg' alt='avatar'>
+                                </a>
+                                <div class='media-body d-flex flex-wrap align-items-center justify-content-between'>
+                                    <div>
+                                        <h5 class='pb-1'><a href='user-profile.html'>Arden Smith</a></h5>
+                                        <div class='stats fs-12 d-flex align-items-center lh-18'>
+                                            <span class='text-black pr-2'>224,110</span>
+                                            <span class='pr-2 d-inline-flex align-items-center'><span class='ball gold'></span>16</span>
+                                            <span class='pr-2 d-inline-flex align-items-center'><span class='ball silver'></span>93</span>
+                                            <span class='pr-2 d-inline-flex align-items-center'><span class='ball'></span>136</span>
+                                        </div>
+                                    </div>
+                                    <small class='meta d-block text-right'>
+                                        <span class='text-black d-block lh-18'>asked</span>
+                                        <span class='d-block lh-18 fs-12'>6 hours ago</span>
+                                    </small>
+                                </div>
+                            </div>
+                                
+                                ";
+                            }
+                        }
                     }
                 }
                 ?>
+                <form method="post" class="card-body" action="">
+                    <?php
+                    if (isset($_POST['submitquiz'])) {
+                        require 'functions/add-answer.php';
+                    }
+                    ?>
+                    <?php echo $message; ?>
+                    <input type="hidden" name="quiz_id" value="<?php echo $_GET['id']; ?>">
+                    <div class="input-box">
+                        <label class="fs-14 text-black fw-medium mb-0">Post Answer</label>
+                        <div class="form-group">
+                            <textarea class="form-control form--control user-text-editor" rows="10" cols="40" name="question_description"><?php echo $description; ?></textarea>
+                            <div class="d-flex align-items-center pt-2">
+                            </div>
+                        </div>
+                    </div><!-- end input-box -->
+
+                    <div class="input-box pt-2">
+
+                        <div class="btn-box">
+                            <button type="submit" class="btn theme-btn" name="submitquiz">Publish your question</button>
+                        </div>
+                    </div>
+                </form>
 
             </div><!-- end row -->
         </div><!-- end container -->
