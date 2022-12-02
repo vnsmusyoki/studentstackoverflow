@@ -15,7 +15,8 @@ if (!isset($_SESSION['student'])) {
         $email = $user['email'];
         $datejoined = $user['date_joined'];
         $userid = $user['id']; 
-        global $fullname, $email, $datejoined, $userid;
+        $userbio = $user['bio']; 
+        global $fullname, $email, $datejoined, $userid, $userbio;
     }
 
     
