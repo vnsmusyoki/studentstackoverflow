@@ -86,7 +86,7 @@ require('admin-account.php');
         <span class="stroke-shape stroke-shape-6"></span>
         <div class="container">
             <div class="hero-content pt-80px pb-80px">
-                <h2 class="section-title">Admin / Upload Categories</h2>
+                <h2 class="section-title">Admin / Manage Categories</h2>
                 <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 125">
                     <defs>
                         <style>
@@ -160,44 +160,95 @@ require('admin-account.php');
             </div><!-- end hero-content -->
         </div><!-- end container -->
     </section>
-    <section class="question-area pt-80px pb-40px">
+    <section class="question-area pt-40px pb-40px">
         <div class="container">
+            <div class="filters pb-3">
+                <div class="d-flex flex-wrap align-items-center justify-content-between pb-3">
+                    <h3 class="fs-22 fw-medium">Categories</h3>
+                    <a href="categories.php" class="btn theme-btn theme-btn-sm">Ask Category</a>
+                </div>
+                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <form method="post" class="mr-3 w-25">
+                        <div class="form-group">
+                            <input class="form-control form--control form-control-sm h-auto lh-34" type="text" name="search" placeholder="Filter  category">
+                            <button class="form-btn" type="button"><i class="la la-search"></i></button>
+                        </div>
+                    </form>
+                    <div class="btn-group btn--group mb-3" role="group" aria-label="Filter button group">
+                        <a href="#" class="btn active">All</a>
+                        <a href="#" class="btn">Popular</a>
+                        <a href="#" class="btn">Most visited</a>
+                    </div>
+                </div>
+            </div><!-- end filters -->
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="card card-item">
-                        <form method="POST" class="card-body" action="#">
-                            <?php
-                            if (isset($_POST['add-category'])) {
-                                require 'functions/add-category.php';
-                            }
-                            ?>
-                            <?php echo $message; ?>
-                            <div class="input-box">
-                                <label class="fs-14 text-black fw-medium mb-0">Categories</label>
-                                <p class="fs-13 pb-3 lh-20">Upload categories</p>
-                                <div class="form-group">
-                                    <input class="form-control form--control" type="text" name="category_name" placeholder="e.g. programming, Marketing, Financing?">
-                                </div>
-                            </div><!-- end input-box -->
-                            <div class="input-box">
-                                <label class="fs-14 text-black fw-medium mb-0">Category Description</label>
-                                
-                                <div class="form-group">
-                                    <input class="form-control form--control" type="text" name="category_description" placeholder="e.g. All programming related questions?">
-                                </div>
-                            </div><!-- end input-box -->
-                            <div class="input-box pt-2">
-                                <div class="btn-box">
-                                    <button type="submit" class="btn theme-btn" name="add-category">Publish your question</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div><!-- end card -->
-                </div><!-- end col-lg-8 -->
+                <?php
+                $addstudent = "SELECT * FROM `categories`";
+                $checkadd = $conn->prepare($addstudent);
+                $checkadd->execute();
+                $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
+                if (count($result) > 0) {
+                    foreach ($result as $row) {
+
+                        $category = $row['category_name'];
+                        $catid = $row['id'];
+                        $description = $row['description'];
+                        $checkquestions = "SELECT * FROM `categories` WHERE `category_id`=?";
+                        $queryquestions = $conn->prepare($checkquestions);
+                        $queryquestions->execute([$catid]);
+                        $quizresult = $queryquestions->fetchAll(PDO::FETCH_ASSOC);
+                        $quizcount = count($quizresult);
+                        echo "
+                               <div class='col-lg-3 responsive-column-half'>
+                    <div class='media media-card p-3 align-items-center hover-y'>
+                        <div class='icon-element shadow-sm flex-shrink-0 mr-3 border border-gray'>
+                            <svg class='svg-icon-color-gray' enable-background='new 0 0 24 24' height='30' viewBox='0 0 24 24' width='30' xmlns='http://www.w3.org/2000/svg'>
+                                <g id='XMLID_1_>
+                                    <path d='m23.5 11.5c.28 0 .5.22.5.5s-.22.5-.5.5h-.5v-1z' />
+                                    <path d='m12.5 11.5h10.5v1h-10.5z' />
+                                    <path d='m21.5 24h-9.5c.28 0 .5-.22.5-.5v-.5h9c.83 0 1.5-.67 1.5-1.5v-9h.5c.28 0 .5-.22.5-.5v9.5c0 1.38-1.12 2.5-2.5 2.5z' />
+                                    <path d='m24 2.5v9.5c0-.28-.22-.5-.5-.5h-.5v-9c0-.83-.67-1.5-1.5-1.5h-9v-.5c0-.28-.22-.5-.5-.5h9.5c1.38 0 2.5 1.12 2.5 2.5z' />
+                                    <path d='m20 6c.28 0 .5.22.5.5s-.22.5-.5.5h-4c-.28 0-.5-.22-.5-.5s.22-.5.5-.5z' />
+                                    <path d='m20 16c.28 0 .5.22.5.5s-.22.5-.5.5h-4c-.28 0-.5-.22-.5-.5s.22-.5.5-.5z' />
+                                    <path d='m20 19c.28 0 .5.22.5.5s-.22.5-.5.5h-4c-.28 0-.5-.22-.5-.5s.22-.5.5-.5z' />
+                                    <path d='m12.5 23v.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-.5z' />
+                                    <path d='m11.5 12.5h1v10.5h-1z' />
+                                    <path d='m11.5 11.5h1v1h-1z' />
+                                    <path d='m11.5 1h1v10.5h-1z' />
+                                    <path d='m12.5.5v.5h-1v-.5c0-.28.22-.5.5-.5s.5.22.5.5z' />
+                                    <path d='m1 11.5h10.5v1h-10.5z' />
+                                    <path d='m8 6c.28 0 .5.22.5.5s-.22.5-.5.5h-1.5v-1z' />
+                                    <path d='m7.85 19.15c.2.19.2.51 0 .7-.09.1-.22.15-.35.15s-.26-.05-.35-.15l-1.15-1.15.7-.7z' />
+                                    <path d='m7.15 16.15c.19-.2.51-.2.7 0 .2.19.2.51 0 .7l-1.15 1.15-.7-.7z' />
+                                    <path d='m5.505 17.505h.99v.99h-.99z' transform='matrix(.707 -.707 .707 .707 -10.971 9.515)' />
+                                    <path d='m6.5 7v1.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-1.5z' />
+                                    <path d='m5.5 6h1v1h-1z' />
+                                    <path d='m6.5 4.5v1.5h-1v-1.5c0-.28.22-.5.5-.5s.5.22.5.5z' />
+                                    <path d='m6 17.3-.7.7-1.15-1.15c-.2-.19-.2-.51 0-.7.19-.2.51-.2.7 0z' />
+                                    <path d='m5.5 6v1h-1.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5z' />
+                                    <path d='m4.85 19.85c-.09.1-.22.15-.35.15s-.26-.05-.35-.15c-.2-.19-.2-.51 0-.7l1.15-1.15.7.7z' />
+                                    <path d='m1 11.5v1h-.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5z' />
+                                    <path d='m0 2.5c0-1.38 1.12-2.5 2.5-2.5h9.5c-.28 0-.5.22-.5.5v.5h-9c-.83 0-1.5.67-1.5 1.5v9h-.5c-.28 0-.5.22-.5.5z' />
+                                    <path d='m1 21.5c0 .83.67 1.5 1.5 1.5h9v.5c0 .28.22.5.5.5h-9.5c-1.38 0-2.5-1.12-2.5-2.5v-9.5c0 .28.22.5.5.5h.5z' />
+                                </g>
+                            </svg>
+                        </div>
+                        <div class='media-body'>
+                            <h5 class='fs-19 fw-medium mb-1'><a href='category.html'>$category</a></h5>
+                            <p class='fw-medium fs-15 text-black-50 lh-18'>$quizcount</p>
+                        </div><!-- end media-body -->
+                    </div><!-- end media -->
+                </div><!-- end col-lg-3 -->
+                               ";
+                    }
+                }
+                ?>
+
 
             </div><!-- end row -->
+
         </div><!-- end container -->
-    </section>
+    </section><!-- end question-area -->
 
     <?php include 'footer.php'; ?>
     <!-- ================================
