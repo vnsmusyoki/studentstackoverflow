@@ -106,7 +106,7 @@ $message = $description = $question = $category = '';
                         $querycategory->execute([$quizid]);
                         $categoryresult = $querycategory->fetch();
                         $categoryname = $categoryresult['category_name'];
-                         
+
                         $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
                         $queryanswers = $conn->prepare($checkanswers);
                         $queryanswers->execute([$categoryid]);
@@ -150,7 +150,7 @@ $message = $description = $question = $category = '';
                     }
                 }
                 ?>
-                
+
             </div><!-- end row -->
         </div><!-- end container -->
     </section><!-- end question-area -->
