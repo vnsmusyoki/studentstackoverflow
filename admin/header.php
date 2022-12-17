@@ -3,7 +3,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="logo-box">
-                        <a href="index.php" class="logo"><img src="images/logo.png" alt="logo" style="height:80px;"></a>
+                        <a href="../index.php" class="logo"><img src="../images/logo.png" alt="logo" style="height:80px;"></a>
                         <div class="user-action">
                             <div class="search-menu-toggle icon-element icon-element-xs shadow-sm mr-1" data-toggle="tooltip" data-placement="top" title="Search">
                                 <i class="la la-search"></i>
@@ -19,18 +19,12 @@
                         <nav class="menu-bar mr-auto">
                             <ul>
                                 <li>
-                                    <a href="index.php">Home </a>
+                                    <a href="../index.php">Home </a>
 
                                 </li>
-                                <li class="is-mega-menu">
-                                    <a href="student/manage-questions.php">Posts </a>
-
-                                </li>
+                       
                                 <li>
-                                    <a href="student/manage-questions.php">Questions </a>
-                                </li>
-                                <li>
-                                    <a href="student/dashboard.php">My  Account </a>
+                                    <a href="setting.php">My  Account </a>
                                 </li>
                                  
                             </ul><!-- end ul -->
@@ -41,9 +35,8 @@
                                 <button class="form-btn" type="button"><i class="la la-search"></i></button>
                             </div>
                         </form>
-                        <div class="nav-right-button">
-                            <a href="sign-in.php" class="btn theme-btn theme-btn-outline mr-2">Login</a>
-                            <a href="sign-up.php" class="btn theme-btn" >Sign up</a>
+                        <div class="nav-right-button"> 
+                            <a href="logout.php" class="btn theme-btn" >Log Out</a>
                         </div><!-- end nav-right-button -->
                     </div><!-- end menu-wrapper -->
                 </div><!-- end col-lg-10 -->
