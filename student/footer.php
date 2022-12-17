@@ -9,10 +9,8 @@
                 <div class="footer-item">
                     <h3 class="fs-18 fw-bold pb-2 text-white">Student</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
-                        <li><a href="about.html">My Profile</a></li>
-                        <li><a href="contact.html">Posts</a></li>
-                        <li><a href="careers.html">Modules</a></li>
-                        <li><a href="advertising.html">My Account</a></li>
+                        <li><a href="setting.php">My Profile</a></li> 
+                        <li><a href="dashboard.php">My Account</a></li>
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
@@ -20,9 +18,7 @@
                 <div class="footer-item">
                     <h3 class="fs-18 fw-bold pb-2 text-white">Quick Links</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
-                        <li><a href="privacy-policy.html">Sign Up</a></li>
-                        <li><a href="terms-and-conditions.html">Sign In</a></li>
-                        <li><a href="privacy-policy.html">My Posts</a></li>
+                        <li><a href="logout.php">Log Out</a></li>  
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
@@ -30,8 +26,7 @@
                 <div class="footer-item">
                     <h3 class="fs-18 fw-bold pb-2 text-white">Help</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
-                        <li><a href="faq.html">Knowledge Base</a></li>
-                        <li><a href="contact.html">Support</a></li>
+                        <li><a href="../index.php">Knowledge Base</a></li> 
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
@@ -39,10 +34,7 @@
                 <div class="footer-item">
                     <h3 class="fs-18 fw-bold pb-2 text-white">Connect with us</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
-                        <li><a href="#"><i class="la la-facebook mr-1"></i> Facebook</a></li>
-                        <li><a href="#"><i class="la la-twitter mr-1"></i> Twitter</a></li>
-                        <li><a href="#"><i class="la la-linkedin mr-1"></i> LinkedIn</a></li>
-                        <li><a href="#"><i class="la la-instagram mr-1"></i> Instagram</a></li>
+                        <li><a href="#"><i class="la la-facebook mr-1"></i> Facebook</a></li> 
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->

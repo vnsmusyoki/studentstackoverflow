@@ -23,14 +23,14 @@
 
                                 </li>
                                 <li class="is-mega-menu">
-                                    <a href="posts.php">Posts </a>
+                                    <a href="student/manage-questions.php">Posts </a>
 
                                 </li>
                                 <li>
-                                    <a href="ask-question.php">Questions </a>
+                                    <a href="student/manage-questions.php">Questions </a>
                                 </li>
                                 <li>
-                                    <a href="profile.php">My  Account </a>
+                                    <a href="student/dashboard.php">My  Account </a>
                                 </li>
                                  
                             </ul><!-- end ul -->

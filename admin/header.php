@@ -3,7 +3,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="logo-box">
-                        <a href="index.php" class="logo"><img src="../images/logo.png" alt="logo" style="height:80px;"></a>
+                        <a href="index.php" class="logo"><img src="images/logo.png" alt="logo" style="height:80px;"></a>
                         <div class="user-action">
                             <div class="search-menu-toggle icon-element icon-element-xs shadow-sm mr-1" data-toggle="tooltip" data-placement="top" title="Search">
                                 <i class="la la-search"></i>
@@ -23,14 +23,14 @@
 
                                 </li>
                                 <li class="is-mega-menu">
-                                    <a href="posts.php">Posts </a>
+                                    <a href="student/manage-questions.php">Posts </a>
 
                                 </li>
                                 <li>
-                                    <a href="ask-question.php">Questions </a>
+                                    <a href="student/manage-questions.php">Questions </a>
                                 </li>
                                 <li>
-                                    <a href="profile.php">My  Account </a>
+                                    <a href="student/dashboard.php">My  Account </a>
                                 </li>
                                  
                             </ul><!-- end ul -->
