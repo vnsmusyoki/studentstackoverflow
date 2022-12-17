@@ -46,7 +46,7 @@
     <!--======================================
         START HEADER AREA
     ======================================-->
-   <?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
     <section class="hero-area pt-80px pb-80px hero-bg-1">
         <div class="overlay"></div>
         <span class="stroke-shape stroke-shape-1"></span>
@@ -100,18 +100,26 @@
                 <div class="col-lg-2">
                     <div class="sidebar pb-45px position-sticky top-0 mt-2">
                         <ul class="generic-list-item generic-list-item-highlight fs-15">
-                            <li class="lh-26 active"><a href="home-2.html"><i class="la la-home mr-1 text-black"></i> Home</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-flask mr-1 text-black"></i> Science</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-pencil mr-1 text-black"></i> Math</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-globe mr-1 text-black"></i> History</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-book-open mr-1 text-black"></i> Literature</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-laptop mr-1 text-black"></i> Technology</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-dumbbell mr-1 text-black"></i> Health</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-gavel mr-1 text-black"></i> Law</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-briefcase mr-1 text-black"></i> Business</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-file-text mr-1 text-black"></i> All Topics</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-puzzle-piece mr-1 text-black"></i> Random</a></li>
-                            <li class="lh-26"><a href="category.html"><i class="la la-check mr-1 text-black"></i> Unanswered</a></li>
+                            <li class="lh-26 active"><a href="index.php"><i class="la la-home mr-1 text-black"></i> Home</a></li>
+                            <?php
+                            require 'db-connection.php';
+                            $checkcategory = "SELECT * FROM `categories`";
+                            $querycategory = $conn->prepare($checkcategory);
+                            $querycategory->execute();
+                            $result = $querycategory->fetchAll(PDO::FETCH_ASSOC);
+                            if (count($result) > 0) {
+                                foreach ($result as $row) {
+             
+                                    $catid = $row['id'];
+                                    $catname = $row['category_name'];
+
+                                    echo "
+                                    <li class='lh-26'><a href='index.php?cat=$catid'><i class='la la-pencil mr-1 text-black'></i> $catname</a></li>
+                                    ";
+                                }
+                            }
+                            ?>
+                            
                         </ul>
                     </div><!-- end sidebar -->
                 </div><!-- end col-lg-2 -->
@@ -124,34 +132,13 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="questions-tab" data-toggle="tab" href="#questions" role="tab" aria-controls="questions" aria-selected="true">Questions</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="jobs-tab" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-selected="false">Jobs</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tags-tab" data-toggle="tab" href="#tags" role="tab" aria-controls="tags" aria-selected="false">Tags</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="badges-tab" data-toggle="tab" href="#badges" role="tab" aria-controls="badges" aria-selected="false">Badges</a>
-                            </li>
+                             
                         </ul>
                         <div class="tab-content pt-40px" id="myTabContent">
                             <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
                                 <div class="filters d-flex align-items-center justify-content-between pb-4">
                                     <h3 class="fs-17 fw-medium">All Questions</h3>
-                                    <div class="filter-option-box w-20">
-                                        <select class="select-container">
-                                            <option value="newest" selected="selected">Newest </option>
-                                            <option value="featured">Bountied (390)</option>
-                                            <option value="frequent">Frequent </option>
-                                            <option value="votes">Votes </option>
-                                            <option value="active">Active </option>
-                                            <option value="unanswered">Unanswered </option>
-                                            <option value="Votes">Votes </option>
-                                        </select>
-                                    </div><!-- end filter-option-box -->
+                                   
                                 </div><!-- end filters -->
                                 <div class="question-main-bar">
                                     <div class="questions-snippet">
@@ -2749,7 +2736,7 @@
     <!-- ================================
          END FOOTER AREA
 ================================= -->
- <?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
     <!-- ================================
           END FOOTER AREA
 ================================= -->
@@ -2761,8 +2748,8 @@
     <!-- end back to top -->
 
     <!-- Modal -->
-    
- 
+
+
     <!-- template js files -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -2770,5 +2757,5 @@
     <script src="js/selectize.min.js"></script>
     <script src="js/main.js"></script>
 </body>
- 
+
 </html>
