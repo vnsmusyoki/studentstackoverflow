@@ -234,7 +234,7 @@ require('admin-account.php');
                             </svg>
                         </div>
                         <div class='media-body'>
-                            <h5 class='fs-19 fw-medium mb-1'><a href='category.html'>$category</a></h5>
+                            <h5 class='fs-19 fw-medium mb-1'><a href='#l'>$category</a></h5>
                             <p class='fw-medium fs-15 text-black-50 lh-18'>$quizcount</p>
                         </div><!-- end media-body -->
                     </div><!-- end media -->

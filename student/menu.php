@@ -9,7 +9,7 @@
         <a class="nav-link"  href="manage-questions.php" role="tab" aria-controls="user-activity" aria-selected="false">My Questions</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link"  href="manage-suggestions.php" role="tab" aria-controls="user-activity" aria-selected="false">My Questions</a>
+        <a class="nav-link"  href="manage-suggestions.php" role="tab" aria-controls="user-activity" aria-selected="false">Feedback / Comments</a>
     </li>
     <li class="nav-item">
         <a class="nav-link"  href="logout.php" role="tab" aria-controls="user-activity" aria-selected="false">Log Out</a>

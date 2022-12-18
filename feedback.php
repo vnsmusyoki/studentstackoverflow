@@ -4,7 +4,7 @@ $message = $description = $title = $email = '';
 if (isset($_GET['success'])) {
     $check = $_GET['success'];
     if ($check) {
-        $msg = "
+       echo  $msg = "
     <script>
     toastr.success('Feddback submited successfully. Login for more details.');
     </script>
@@ -134,7 +134,8 @@ if (isset($_GET['success'])) {
                             ?>
 
                         </ul>
-                        <?php echo $msg; ?>
+                        
+                        
                     </div><!-- end sidebar -->
                 </div><!-- end col-lg-2 -->
                 <div class="col-lg-7">
