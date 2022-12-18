@@ -167,8 +167,11 @@ $message = $description = $question = $category = '';
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card card-item">
-                        <form method="post" class="card-body" action="">
+                        <form method="post" class="card-body" action="" enctype="multipart/form-data">
                             <?php
+                            ini_set('display_errors', 1);
+                            ini_set('display_startup_errors', 1);
+                            error_reporting(E_ALL);
                             if (isset($_POST['submitquiz'])) {
                                 require 'functions/add-quiz.php';
                             }
@@ -181,6 +184,12 @@ $message = $description = $question = $category = '';
                                     <input class="form-control form--control" type="text" name="question_title" placeholder="e.g. Is there an R function for finding the index of an element in a vector?" value="<?php echo $question; ?>">
                                 </div>
                             </div><!-- end input-box -->
+                            <div class="input-box">
+                        <label class="fs-14 text-black fw-medium mb-0"> Question Image</label>
+                        <div class="form-group">
+                            <input class="form-control form--control" name="answer_image" type="file">
+                        </div>
+                    </div><!-- end input-box -->
                             <div class="input-box">
                                 <label class="fs-14 text-black fw-medium mb-0">Category</label>
                                 <p class="fs-13 pb-3 lh-20">Please choose the appropriate section so the question can be searched easily.</p>

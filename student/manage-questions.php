@@ -95,6 +95,7 @@ $message = $description = $question = $category = '';
                         $quizdesc = $row['description'];
                         $quizpostedby = $row['posted_by'];
                         $quizdate = $row['date_uploaded'];
+                        $postimage = $row['image'];
                         $checkuser = "SELECT * FROM `users` WHERE `id`=?";
                         $queryuser = $conn->prepare($checkuser);
                         $queryuser->execute([$quizpostedby]);
@@ -137,8 +138,16 @@ $message = $description = $question = $category = '';
                                             <span class='pr-1'>Answers</span>
                                             <span class='text-black'>$answercount</span>
                                             </a>
+                                            <a href='delete-question-answers.php?quiz=$quizid'>
+                                            <span class='pr-1 badge badge-danger '>Delete Thread</span> 
+                                            </a>
                                         </div>
                                     </div>
+                                    ";
+                                    if (!empty($postimage)) {
+                                        echo "<img class='img-fluid' src='../quiz_images/$postimage' >";
+                                    }
+                                    echo "
                                 </div>
                             </div><!-- end media -->
                         </div><!-- end question-highlight -->

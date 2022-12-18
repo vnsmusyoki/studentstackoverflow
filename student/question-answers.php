@@ -89,30 +89,30 @@ $message = $description = $question = $category = '';
                 $checkadd = $conn->prepare($addstudent);
                 $checkadd->execute([$question]);
                 $selectedquiz = $checkadd->fetch();
-                
-                        $quiztitle = $selectedquiz['question_title'];
-                        $quizid = $selectedquiz['id'];
-                        $categoryid = $selectedquiz['category_id'];
-                        $quizdesc = $selectedquiz['description'];
-                        $quizpostedby = $selectedquiz['posted_by'];
-                        $quizdate = $selectedquiz['date_uploaded'];
-                        $checkuser = "SELECT * FROM `users` WHERE `id`=?";
-                        $queryuser = $conn->prepare($checkuser);
-                        $queryuser->execute([$quizpostedby]);
-                        $quizresult = $queryuser->fetch();
-                        $postedby = $quizresult['full_names'];
-                        $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
-                        $querycategory = $conn->prepare($checkcategory);
-                        $querycategory->execute([$quizid]);
-                        $categoryresult = $querycategory->fetch();
-                        $categoryname = $categoryresult['category_name'];
 
-                        $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
-                        $queryanswers = $conn->prepare($checkanswers);
-                        $queryanswers->execute([$question]);
-                        $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
-                        $answercount = count($queryresult);
-                        echo "
+                $quiztitle = $selectedquiz['question_title'];
+                $quizid = $selectedquiz['id'];
+                $categoryid = $selectedquiz['category_id'];
+                $quizdesc = $selectedquiz['description'];
+                $quizpostedby = $selectedquiz['posted_by'];
+                $quizdate = $selectedquiz['date_uploaded'];
+                $checkuser = "SELECT * FROM `users` WHERE `id`=?";
+                $queryuser = $conn->prepare($checkuser);
+                $queryuser->execute([$quizpostedby]);
+                $quizresult = $queryuser->fetch();
+                $postedby = $quizresult['full_names'];
+                $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
+                $querycategory = $conn->prepare($checkcategory);
+                $querycategory->execute([$quizid]);
+                $categoryresult = $querycategory->fetch();
+                $categoryname = $categoryresult['category_name'];
+
+                $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
+                $queryanswers = $conn->prepare($checkanswers);
+                $queryanswers->execute([$question]);
+                $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
+                $answercount = count($queryresult);
+                echo "
                         <div class='col-lg-12'>
                     <div class='question-main-bar mb-50px'>
                         <div class='question-highlight'>
@@ -147,23 +147,23 @@ $message = $description = $question = $category = '';
                 </div><!-- end col-lg-9 -->
                         
                         ";
+                echo "Answers";
+                if (count($queryresult) > 0) {
+                    foreach ($queryresult as $row) {
+                        $anwer = $row['answer'];
+                        $answeredby  = $row['answered_by'];
+                        $timeanswered  = $row['date_uploaded'];
+                        $postimage = $row['image'];
+                        $ansid = $row['id'];
+
+                        $answeruser = "SELECT * FROM `users` WHERE `id`=?";
+                        $queryansweruser = $conn->prepare($answeruser);
+                        $queryansweruser->execute([$answeredby]);
+                        $answeuserresult = $queryansweruser->fetch();
+                        $answeredname = $answeuserresult['full_names'];
 
 
-                        echo "Answers";
-                        if (count($queryresult) > 0) {
-                            foreach ($queryresult as $row) {
-                                $anwer = $row['answer'];
-                                $answeredby  = $row['answered_by'];
-                                $timeanswered  = $row['date_uploaded'];
-
-                                $answeruser = "SELECT * FROM `users` WHERE `id`=?";
-                                $queryansweruser = $conn->prepare($answeruser);
-                                $queryansweruser->execute([$answeredby]);
-                                $answeuserresult = $queryansweruser->fetch();
-                                $answeredname = $answeuserresult['full_names'];
-
-
-                                echo "
+                        echo "
                                 <div class='col-lg-12'>
                                 <div class='question-main-bar mb-50px'>
                                 <div class='media media-card user-media owner align-items-center'>
@@ -171,8 +171,19 @@ $message = $description = $question = $category = '';
                                     <img src='https://ui-avatars.com/api/?name=$answeredname' alt='avatar'>
                                 </a>
                                 <div class='media-body d-flex flex-column align-items-start justify-content-column'>
+                                    <div class='d-flex flex-row justify-content-between'>
                                     <div>
-                                        <h5 class='pb-1'><a href='#'>$answeredname</a></h5>
+                                    <h5 class='pb-1'><a href='#'>$answeredname</a></h5>
+                                    </div>
+                                    <div class='d-flex  justify-content-end'>
+                                        ";
+                        if ($answeredby == $userid) {
+                            echo "<a href='delete-answer.php?answer=$ansid' class='ml-5 text-danger' style='float:right;'>Delete answer</a>";
+                        }
+
+                        echo "
+                                    </div>
+                                        
                                         
                                     </div>
                                     <small class='meta d-block text-right'>
@@ -180,17 +191,22 @@ $message = $description = $question = $category = '';
                                         <span class='d-block lh-18 fs-12'>$timeanswered</span>
                                     </small>
                                     <p>$anwer</p>
+                                    ";
+                        if (!empty($postimage)) {
+                            echo "<img class='img-fluid' src='../quiz_images/$postimage' >";
+                        }
+                        echo "
                                 </div>
                             </div>
                                 </div>
                                 </div>
                                 ";
-                            }
-                        }
-                    
-                
+                    }
+                }
+
+
                 ?>
-                <form method="post" class="card-body" action="">
+                <form method="post" class="card-body" action="" enctype="multipart/form-data">
                     <?php
                     if (isset($_POST['submitquiz'])) {
                         require 'functions/add-answer.php';
@@ -198,6 +214,13 @@ $message = $description = $question = $category = '';
                     ?>
                     <?php echo $message; ?>
                     <input type="hidden" name="quiz_id" value="<?php echo $_GET['id']; ?>">
+                    <div class="input-box">
+                        <label class="fs-14 text-black fw-medium mb-0"> Answer Image</label>
+                        <div class="form-group">
+                            <input class="form-control form--control" name="post_image" type="file">
+
+                        </div>
+                    </div><!-- end input-box -->
                     <div class="input-box">
                         <label class="fs-14 text-black fw-medium mb-0">Post Answer</label>
                         <div class="form-group">
