@@ -102,9 +102,9 @@ $message = $description = $question = $category = '';
                         $quizresult = $queryuser->fetch();
                         $postedby = $quizresult['full_names'];
 
-                        $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
+                         $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                         $querycategory = $conn->prepare($checkcategory);
-                        $querycategory->execute([$quizid]);
+                        $querycategory->execute([$categoryid]);
                         $categoryresult = $querycategory->fetch();
                         $categoryname = $categoryresult['category_name'];
                          
@@ -143,9 +143,10 @@ $message = $description = $question = $category = '';
                                             </a>
                                         </div>
                                     </div>
+                                    <p>$quizdesc</p>
                                     ";
                                     if (!empty($postimage)) {
-                                        echo "<img class='img-fluid' src='../quiz_images/$postimage' >";
+                                        echo "<img  style='height:50vh;width:50%;' src='../quiz_images/$postimage' >";
                                     }
                                     echo "
                                 </div>

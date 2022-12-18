@@ -32,10 +32,12 @@ if (empty($category) || empty($description)) {
                 $filenamenew = uniqid('', true) . '.' . $fileActualExt;
                 $filedestination = '../quiz_images/' . $filenamenew;
                 move_uploaded_file($filetmpname, $filedestination);
+                
                 $checkcategory = $conn->prepare("SELECT * FROM `questions` WHERE question_title=?");
                 $checkcategory->execute([$category]);
                 $checkcategory = $checkcategory->fetch();
                 if (empty($checkcategory)) {
+                    
                     $addcategory = "INSERT INTO questions (`question_title`, `category_id`, `description`, `posted_by`, `image`) VALUES(?,?,?,?,?)";
                     $checkadd = $conn->prepare($addcategory);
                     $queryadd = $checkadd->execute([$question, $category, $description, $userid, $filenamenew]);
