@@ -29,7 +29,7 @@
                     <h3 class="fs-18 fw-bold pb-2 text-white">Help</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
                         <li><a href="index.php">Knowledge Base</a></li>
-                        <li><a href="index.php">Support</a></li>
+                        <li><a href="feedback.php">Support</a></li>
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
