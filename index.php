@@ -165,13 +165,13 @@
                                                     $queryuser->execute([$quizpostedby]);
                                                     $quizresult = $queryuser->fetch();
                                                     $postedby = $quizresult['full_names'];
-                            
+
                                                     $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                                                     $querycategory = $conn->prepare($checkcategory);
                                                     $querycategory->execute([$quizid]);
                                                     $categoryresult = $querycategory->fetch();
                                                     $categoryname = $categoryresult['category_name'];
-                                                     
+
                                                     $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
                                                     $queryanswers = $conn->prepare($checkanswers);
                                                     $queryanswers->execute([$quizid]);
@@ -281,22 +281,20 @@
                 </div><!-- end col-lg-9 -->
                         
                         ";
-                        
                                                 }
                                             }
-                                            
                                         }
                                         ?>
 
                                     </div><!-- end questions-snippet -->
-                                    
+
                                 </div><!-- end question-main-bar -->
                             </div><!-- end tab-pane -->
-                            
+
                         </div><!-- end tab-content -->
                     </div><!-- end question-tabs -->
                 </div><!-- end col-lg-7 -->
-               
+
             </div><!-- end row -->
         </div><!-- end container -->
     </section><!-- end question-area -->
@@ -304,7 +302,7 @@
          END QUESTION AREA
 ================================= -->
 
- 
+
     <?php include 'footer.php'; ?>
     <!-- ================================
           END FOOTER AREA
