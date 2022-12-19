@@ -180,10 +180,10 @@
                                             <div class='row'>
                                             <div class='col-lg-4'>
                                             ";
-                                                                    if (!empty($postimage)) {
-                                                                        echo "<img  class='img-fluid' src='./quiz_images/$postimage' >";
-                                                                    }
-                                                                    echo "
+                                            if (!empty($postimage)) {
+                                                echo "<img  class='img-fluid' src='./quiz_images/$postimage' >";
+                                            }
+                                            echo "
                                             </div>
                                             <div class='col-lg-8'>
                     <div class='question-main-bar mb-50px'>
@@ -229,13 +229,19 @@
                                                     $answeredby  = $row['answered_by'];
                                                     $timeanswered  = $row['date_uploaded'];
                                                     $answerimg = $row['image'];
-
+                                                    $ansid = $row['id'];
                                                     $answeruser = "SELECT * FROM `users` WHERE `id`=?";
                                                     $queryansweruser = $conn->prepare($answeruser);
                                                     $queryansweruser->execute([$answeredby]);
                                                     $answeuserresult = $queryansweruser->fetch();
                                                     $answeredname = $answeuserresult['full_names'];
+                                                    $answecheck = "SELECT * FROM `answer_votes` WHERE `answer_id` = ?";
+                                                    $queryanswrcount = $conn->prepare($answecheck);
+                                                    $queryanswrcount->execute([$ansid]);
+                                                    $queryresultcountanswer = $queryanswrcount->fetchAll(PDO::FETCH_ASSOC);
+                                                    $totalvotes = count($queryresultcountanswer);
 
+                                                   
 
                                                     echo "
                                 <div class='row mt-2' style='width:100%;border:1px solid #ced4da;'>
@@ -258,6 +264,7 @@
                                         <span class='d-block lh-18 fs-12'>$timeanswered</span>
                                     </small>
                                     <p>$anwer</p>
+                                    <span class='bg-info text-white text-sm mx-2' style='border-radius:10px; padding:3px 15px;font-size:14px;'> Answer Votes - $totalvotes</span>
                                 </div>
                             </div>
                                 </div>
@@ -365,6 +372,19 @@
                                                     $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
                                                     $answercount = count($queryresult);
 
+
+                                                    $answecheck = "SELECT * FROM `answer_votes` WHERE `answer_id` = ?";
+                                                    $queryanswrcount = $conn->prepare($answecheck);
+                                                    $queryanswrcount->execute([$ansid]);
+                                                    $queryresultcountanswer = $queryanswrcount->fetchAll(PDO::FETCH_ASSOC);
+                                                    $totalvotes = count($queryresultcountanswer);
+
+                                                    $myanswecheck = "SELECT * FROM `answer_votes` WHERE `answer_id` = ? AND `user_id` =?";
+                                                    $myqueryanswrcount = $conn->prepare($myanswecheck);
+                                                    $myqueryanswrcount->execute([$ansid, $userid]);
+                                                    $myqueryresultcountanswer = $myqueryanswrcount->fetchAll(PDO::FETCH_ASSOC);
+                                                    $mytotalvotes = count($myqueryresultcountanswer);
+
                                                     echo "
                         <div class='col-lg-12'>
                     <div class='question-main-bar mb-50px'>
@@ -390,6 +410,7 @@
                                             <span class='pr-1'>Answers</span>
                                             <span class='text-black'>$answercount</span>
                                             </a>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -404,10 +425,10 @@
                                             }
                                         }
                                         ?>
-                                        
+
                                     </div><!-- end questions-snippet -->
                                     <center><a href="sign-in.php">Please login to answer</a></center>
-                                    
+
                                 </div><!-- end question-main-bar -->
                             </div><!-- end tab-pane -->
 

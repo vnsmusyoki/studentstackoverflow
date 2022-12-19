@@ -1,4 +1,6 @@
-<?php
-session_start();
-unset($_SESSION["student"]);
-header("Location:../sign-in.php");
+<?php   
+session_start(); //to ensure you are using same session
+session_destroy(); //destroy the session
+header("Location:../sign-in.php"); //to redirect back to "index.php" after logging out
+exit();
+?>
