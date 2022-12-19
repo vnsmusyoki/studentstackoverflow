@@ -123,7 +123,7 @@
                         </ul>
                     </div><!-- end sidebar -->
                 </div><!-- end col-lg-2 -->
-                <div class="col-lg-7">
+                <div class="col-lg-10">
                     <div class="question-tabs mb-50px">
                         <ul class="nav nav-tabs generic-tabs justify-content-center" id="myTab" role="tablist">
                             <li class="nav-item">
@@ -159,6 +159,7 @@
                                             $quizdesc = $selectedquiz['description'];
                                             $quizpostedby = $selectedquiz['posted_by'];
                                             $quizdate = $selectedquiz['date_uploaded'];
+                                            $postimage = $selectedquiz['image'];
                                             $checkuser = "SELECT * FROM `users` WHERE `id`=?";
                                             $queryuser = $conn->prepare($checkuser);
                                             $queryuser->execute([$quizpostedby]);
@@ -166,7 +167,7 @@
                                             $postedby = $quizresult['full_names'];
                                             $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                                             $querycategory = $conn->prepare($checkcategory);
-                                            $querycategory->execute([$quizid]);
+                                            $querycategory->execute([$categoryid]);
                                             $categoryresult = $querycategory->fetch();
                                             $categoryname = $categoryresult['category_name'];
 
@@ -176,12 +177,20 @@
                                             $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
                                             $answercount = count($queryresult);
                                             echo "
-                        <div class='col-lg-12'>
+                                            <div class='row'>
+                                            <div class='col-lg-4'>
+                                            ";
+                                                                    if (!empty($postimage)) {
+                                                                        echo "<img  class='img-fluid' src='./quiz_images/$postimage' >";
+                                                                    }
+                                                                    echo "
+                                            </div>
+                                            <div class='col-lg-8'>
                     <div class='question-main-bar mb-50px'>
                         <div class='question-highlight'>
                             <div class='media media-card shadow-none rounded-0 mb-0 bg-transparent p-0'>
                                 <div class='media-body'>
-                                    <h5 class='fs-20'><a href='question-details.html'>$quiztitle</a></h5>
+                                    <h5 class='fs-20 text-success'>$quiztitle</h5>
                                     <div class='meta d-flex flex-wrap align-items-center fs-13 lh-20 py-1'>
                                         <div class='pr-3'>
                                             <span>Posted</span>
@@ -196,12 +205,13 @@
                                             <span class='text-black'>$postedby</span>
                                         </div>
                                         <div class='pr-3'>
-                                        <a href='question-answers.php?id=$quizid'>
+                                        <a href='#'>
                                             <span class='pr-1'>Answers</span>
                                             <span class='text-black'>$answercount</span>
                                             </a>
                                         </div>
                                     </div>
+                                    </p>$quizdesc</p>
                                 </div>
                             </div><!-- end media -->
                         </div><!-- end question-highlight -->
@@ -212,12 +222,13 @@
                         ";
 
 
-                                            echo "Answers";
+                                            echo "<div class='text-center'><h4 class='text-warning' style=';margin-bottom:10px;'>Answers</h4></div>";
                                             if (count($queryresult) > 0) {
                                                 foreach ($queryresult as $row) {
                                                     $anwer = $row['answer'];
                                                     $answeredby  = $row['answered_by'];
                                                     $timeanswered  = $row['date_uploaded'];
+                                                    $answerimg = $row['image'];
 
                                                     $answeruser = "SELECT * FROM `users` WHERE `id`=?";
                                                     $queryansweruser = $conn->prepare($answeruser);
@@ -227,7 +238,11 @@
 
 
                                                     echo "
-                                <div class='col-lg-12'>
+                                <div class='row mt-2' style='width:100%;border:1px solid #ced4da;'>
+                                <div class='col-6'>
+                                <img  class='img-fluid'  src='./quiz_images/$answerimg' >    
+                                </div>
+                                <div class='col-6'>
                                 <div class='question-main-bar mb-50px'>
                                 <div class='media media-card user-media owner align-items-center'>
                                 <a href='#' class='media-img d-block'>
@@ -287,7 +302,7 @@
                                                     <div class='question-highlight'>
                                                         <div class='media media-card shadow-none rounded-0 mb-0 bg-transparent p-0'>
                                                             <div class='media-body'>
-                                                                <h5 class='fs-20'><a href='question-details.html'>$quiztitle</a></h5>
+                                                                <h5 class='fs-20'>$quiztitle</h5>
                                                                 <div class='meta d-flex flex-wrap align-items-center fs-13 lh-20 py-1'>
                                                                     <div class='pr-3'>
                                                                         <span>Posted</span>
@@ -340,7 +355,7 @@
 
                                                     $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                                                     $querycategory = $conn->prepare($checkcategory);
-                                                    $querycategory->execute([$quizid]);
+                                                    $querycategory->execute([$categoryid]);
                                                     $categoryresult = $querycategory->fetch();
                                                     $categoryname = $categoryresult['category_name'];
 
@@ -356,7 +371,7 @@
                         <div class='question-highlight'>
                             <div class='media media-card shadow-none rounded-0 mb-0 bg-transparent p-0'>
                                 <div class='media-body'>
-                                    <h5 class='fs-20'><a href='question-details.html'>$quiztitle</a></h5>
+                                    <h5 class='fs-20'>$quiztitle</h5>
                                     <div class='meta d-flex flex-wrap align-items-center fs-13 lh-20 py-1'>
                                         <div class='pr-3'>
                                             <span>Posted</span>
@@ -389,9 +404,10 @@
                                             }
                                         }
                                         ?>
-
+                                        
                                     </div><!-- end questions-snippet -->
-
+                                    <center><a href="sign-in.php">Please login to answer</a></center>
+                                    
                                 </div><!-- end question-main-bar -->
                             </div><!-- end tab-pane -->
 

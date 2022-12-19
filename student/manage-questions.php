@@ -81,7 +81,7 @@ $message = $description = $question = $category = '';
 ======================================-->
     <section class="question-area pt-40px pb-40px">
         <div class="container">
-            <div class="row">
+            
                 <?php
                 $addstudent = "SELECT * FROM `questions` WHERE `posted_by` = ?";
                 $checkadd = $conn->prepare($addstudent);
@@ -114,7 +114,15 @@ $message = $description = $question = $category = '';
                         $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
                         $answercount = count($queryresult);
                         echo "
-                        <div class='col-lg-12'>
+                        <div class='row'>
+                        <div class='col-lg-4'>
+                        ";
+                                                if (!empty($postimage)) {
+                                                    echo "<img  class='img-fluid' src='../quiz_images/$postimage' >";
+                                                }
+                                                echo "
+                        </div>
+                        <div class='col-lg-8'>
                     <div class='question-main-bar mb-50px'>
                         <div class='question-highlight'>
                             <div class='media media-card shadow-none rounded-0 mb-0 bg-transparent p-0'>
@@ -142,16 +150,12 @@ $message = $description = $question = $category = '';
                                             <span class='pr-1 badge badge-danger '>Delete Thread</span> 
                                             </a>
                                             <a href='edit-question.php?quiz=$quizid'>
-                                            <span class='pr-1 badge badge-danger '>Delete Thread</span> 
+                                            <span class='pr-1 badge badge-success '>Edit  Question</span> 
                                             </a>
                                         </div>
                                     </div>
                                     <p>$quizdesc</p>
-                                    ";
-                                    if (!empty($postimage)) {
-                                        echo "<img  style='height:50vh;width:50%;' src='../quiz_images/$postimage' >";
-                                    }
-                                    echo "
+                                    
                                 </div>
                             </div><!-- end media -->
                         </div><!-- end question-highlight -->
@@ -164,7 +168,7 @@ $message = $description = $question = $category = '';
                 }
                 ?>
                 
-            </div><!-- end row -->
+            
         </div><!-- end container -->
     </section><!-- end question-area -->
 

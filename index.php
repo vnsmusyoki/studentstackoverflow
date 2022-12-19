@@ -168,7 +168,7 @@
 
                                                     $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                                                     $querycategory = $conn->prepare($checkcategory);
-                                                    $querycategory->execute([$quizid]);
+                                                    $querycategory->execute([$categoryid]);
                                                     $categoryresult = $querycategory->fetch();
                                                     $categoryname = $categoryresult['category_name'];
 
@@ -236,7 +236,7 @@
 
                                                     $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                                                     $querycategory = $conn->prepare($checkcategory);
-                                                    $querycategory->execute([$quizid]);
+                                                    $querycategory->execute([$categoryid]);
                                                     $categoryresult = $querycategory->fetch();
                                                     $categoryname = $categoryresult['category_name'];
 
@@ -252,7 +252,7 @@
                         <div class='question-highlight'>
                             <div class='media media-card shadow-none rounded-0 mb-0 bg-transparent p-0'>
                                 <div class='media-body'>
-                                    <h5 class='fs-20'><a href='question-details.html'>$quiztitle</a></h5>
+                                    <h5 class='fs-20'><a href='question-answers.php?id=$quizid'>$quiztitle</a></h5>
                                     <div class='meta d-flex flex-wrap align-items-center fs-13 lh-20 py-1'>
                                         <div class='pr-3'>
                                             <span>Posted</span>

@@ -2,6 +2,9 @@
 
 require('student-account.php');
 ?>
+<?php
+$message = $description = $question = $category = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +14,7 @@ require('student-account.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Student | Dashboard</title>
+    <title>Student | My Questions</title>
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -27,11 +30,12 @@ require('student-account.php');
     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
     <link rel="stylesheet" href="../css/selectize.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/toastr-btn.css">
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/toastr.min.js"></script>
-    <script src="assets/js/toastr-options.js"></script>
+    <link rel="stylesheet" href="../css/jquery-te-1.4.0.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/toastr-btn.css">
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/toastr.min.js"></script>
+    <script src="../assets/js/toastr-options.js"></script>
     <!-- end inject -->
 </head>
 
@@ -75,7 +79,102 @@ require('student-account.php');
     <!--======================================
         END HERO AREA
 ======================================-->
+    <section class="question-area pt-40px pb-40px">
+        <div class="container">
+            
+                <?php
+                $addstudent = "SELECT * FROM `questions`";
+                $checkadd = $conn->prepare($addstudent);
+                $checkadd->execute();
+                $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
+                if (count($result) > 0) {
+                    foreach ($result as $row) {
+                        $quiztitle = $row['question_title'];
+                        $quizid = $row['id'];
+                        $categoryid = $row['category_id'];
+                        $quizdesc = $row['description'];
+                        $quizpostedby = $row['posted_by'];
+                        $quizdate = $row['date_uploaded'];
+                        $postimage = $row['image'];
+                        $checkuser = "SELECT * FROM `users` WHERE `id`=?";
+                        $queryuser = $conn->prepare($checkuser);
+                        $queryuser->execute([$quizpostedby]);
+                        $quizresult = $queryuser->fetch();
+                        $postedby = $quizresult['full_names'];
 
+                         $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
+                        $querycategory = $conn->prepare($checkcategory);
+                        $querycategory->execute([$categoryid]);
+                        $categoryresult = $querycategory->fetch();
+                        $categoryname = $categoryresult['category_name'];
+                         
+                        $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
+                        $queryanswers = $conn->prepare($checkanswers);
+                        $queryanswers->execute([$quizid]);
+                        $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
+                        $answercount = count($queryresult);
+                        echo "
+                        <div class='row'>
+                        <div class='col-lg-4'>
+                        ";
+                                                if (!empty($postimage)) {
+                                                    echo "<img  class='img-fluid' src='../quiz_images/$postimage' >";
+                                                }
+                                                echo "
+                        </div>
+                        <div class='col-lg-8'>
+                    <div class='question-main-bar mb-50px'>
+                        <div class='question-highlight'>
+                            <div class='media media-card shadow-none rounded-0 mb-0 bg-transparent p-0'>
+                                <div class='media-body'>
+                                    <h5 class='fs-20'><a href='question-details.html'>$quiztitle</a></h5>
+                                    <div class='meta d-flex flex-wrap align-items-center fs-13 lh-20 py-1'>
+                                        <div class='pr-3'>
+                                            <span>Posted</span>
+                                            <span class='text-black'>$quizdate</span>
+                                        </div>
+                                        <div class='pr-3'>
+                                            <span class='pr-1'>Category</span>
+                                            <a href='#' class='text-black'>$categoryname</a>
+                                        </div>
+                                        <div class='pr-3'>
+                                            <span class='pr-1'>Posted By</span>
+                                            <span class='text-black'>$postedby</span>
+                                        </div>
+                                        <div class='pr-3'>
+                                        <a href='question-answers.php?id=$quizid'>
+                                            <span class='pr-1'>Answers</span>
+                                            <span class='text-black'>$answercount</span>
+                                            </a>
+                                            ";
+                                            if($quizpostedby == $userid){
+                                               echo " <a href='delete-question-answers.php?quiz=$quizid'>
+                                                <span class='pr-1 badge badge-danger '>Delete Thread</span> 
+                                                </a>
+                                                <a href='edit-question.php?quiz=$quizid'>
+                                                <span class='pr-1 badge badge-success '>Edit  Question</span> 
+                                                </a>";
+                                            }
+                                            echo "
+                                        </div>
+                                    </div>
+                                    <p>$quizdesc</p>
+                                    
+                                </div>
+                            </div><!-- end media -->
+                        </div><!-- end question-highlight -->
+
+                    </div><!-- end question-main-bar -->
+                </div><!-- end col-lg-9 -->
+                        
+                        ";
+                    }
+                }
+                ?>
+                
+            
+        </div><!-- end container -->
+    </section><!-- end question-area -->
 
     <?php include 'footer.php'; ?>
     <!-- ================================
@@ -97,6 +196,8 @@ require('student-account.php');
     <script src="../js/owl.carousel.min.js"></script>
     <script src="../js/selectize.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/jquery-te-1.4.0.min.js"></script>
+    <script src="../js/jquery.multi-file.min.js"></script>
 </body>
 
 </html>

@@ -23,7 +23,7 @@ toastr.error('Incorrect email address. Provide a valid one.');
 </script>
 ";
 } else {
-    $stmt = $conn->prepare("SELECT * FROM feedback WHERE email=? AND title=? AND message=?");
+    $stmt = $conn->prepare("SELECT * FROM feedback WHERE user_id=? AND title=? AND message=?");
     $stmt->execute([$email, $title, $description]);
     $user = $stmt->fetch();
 

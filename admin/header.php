@@ -29,12 +29,7 @@
                                  
                             </ul><!-- end ul -->
                         </nav><!-- end main-menu -->
-                        <form method="post" class="mr-4">
-                            <div class="form-group mb-0">
-                                <input class="form-control form--control form--control-bg-gray" type="text" name="search" placeholder="Type your search words...">
-                                <button class="form-btn" type="button"><i class="la la-search"></i></button>
-                            </div>
-                        </form>
+                        
                         <div class="nav-right-button"> 
                             <a href="logout.php" class="btn theme-btn" >Log Out</a>
                         </div><!-- end nav-right-button -->
@@ -72,12 +67,7 @@
         </div><!-- end off-canvas-menu -->
         <div class="mobile-search-form">
             <div class="d-flex align-items-center">
-                <form method="post" class="flex-grow-1 mr-3">
-                    <div class="form-group mb-0">
-                        <input class="form-control form--control pl-40px" type="text" name="search" placeholder="Type your search words...">
-                        <span class="la la-search input-icon"></span>
-                    </div>
-                </form>
+                
                 <div class="search-bar-close icon-element icon-element-sm shadow-sm">
                     <i class="la la-times"></i>
                 </div><!-- end off-canvas-menu-close -->

@@ -83,7 +83,7 @@ $message = $description = $question = $category = '';
         <div class="container">
             <div class="row">
                 <?php
-                $addstudent = "SELECT * FROM `feedback` WHERE `email` = ?";
+                $addstudent = "SELECT * FROM `feedback` WHERE `user_id` = ?";
                 $checkadd = $conn->prepare($addstudent);
                 $checkadd->execute([$userid]);
                 $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);

@@ -103,7 +103,7 @@ $message = $description = $question = $category = '';
                 $postedby = $quizresult['full_names'];
                 $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
                 $querycategory = $conn->prepare($checkcategory);
-                $querycategory->execute([$quizid]);
+                $querycategory->execute([$categoryid]);
                 $categoryresult = $querycategory->fetch();
                 $categoryname = $categoryresult['category_name'];
 
@@ -112,6 +112,9 @@ $message = $description = $question = $category = '';
                 $queryanswers->execute([$question]);
                 $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
                 $answercount = count($queryresult);
+
+
+
                 echo "
                         <div class='col-lg-12'>
                     <div class='question-main-bar mb-50px'>
@@ -154,13 +157,23 @@ $message = $description = $question = $category = '';
                         $answeredby  = $row['answered_by'];
                         $timeanswered  = $row['date_uploaded'];
                         $postimage = $row['image'];
-                        $ansid = $row['id'];
-
+                        $ansid = $row['id']; 
                         $answeruser = "SELECT * FROM `users` WHERE `id`=?";
                         $queryansweruser = $conn->prepare($answeruser);
                         $queryansweruser->execute([$answeredby]);
                         $answeuserresult = $queryansweruser->fetch();
                         $answeredname = $answeuserresult['full_names'];
+                        $answecheck = "SELECT * FROM `answer_votes` WHERE `answer_id` = ?";
+                        $queryanswrcount = $conn->prepare($answecheck);
+                        $queryanswrcount->execute([$ansid]);
+                        $queryresultcountanswer = $queryanswrcount->fetchAll(PDO::FETCH_ASSOC);
+                        $totalvotes = count($queryresultcountanswer);
+                        
+                        $myanswecheck = "SELECT * FROM `answer_votes` WHERE `answer_id` = ? AND `user_id` =?";
+                        $myqueryanswrcount = $conn->prepare($myanswecheck);
+                        $myqueryanswrcount->execute([$ansid, $userid]);
+                        $myqueryresultcountanswer = $myqueryanswrcount->fetchAll(PDO::FETCH_ASSOC);
+                        $mytotalvotes = count($myqueryresultcountanswer);
 
 
                         echo "
@@ -180,7 +193,12 @@ $message = $description = $question = $category = '';
                         if ($answeredby == $userid) {
                             echo "<a href='delete-answer.php?answer=$ansid' class='ml-5 text-danger' style='float:right;'>Delete answer</a>";
                         }
-
+                        echo "<span class='bg-info text-white text-sm mx-2' style='border-radius:10px; padding:3px 15px;font-size:14px;'> Answer Votes - $totalvotes</span>";
+                        if($mytotalvotes == 0){
+                            echo "<a href='vote-answer.php?answer=$ansid'>vote answer</a>";
+                        }else{
+                            echo "<a href='remove-answer-vote.php?answer=$ansid'>Unvote</a>";
+                        }
                         echo "
                                     </div>
                                         

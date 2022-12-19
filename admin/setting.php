@@ -1,6 +1,6 @@
 <?php
 
-require('student-account.php');
+require('admin-account.php');
 ?>
 <?php $message = $emailmessage = $update_bio = $password = $confirm_password = $oldemail = $newemail = $confirmnewemail = '';
 
@@ -22,6 +22,7 @@ if (isset($_GET['updateemail'])) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +32,7 @@ if (isset($_GET['updateemail'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Student | Dashboard</title>
+    <title>Admin Stack Overflow </title>
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -52,55 +53,66 @@ if (isset($_GET['updateemail'])) {
     <script src="../assets/js/jquery-3.3.1.min.js"></script>
     <script src="../assets/js/toastr.min.js"></script>
     <script src="../assets/js/toastr-options.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
+
     <!-- end inject -->
 </head>
 
 <body>
 
+    <!-- start cssload-loader -->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="spinner" viewBox="0 0 50 50">
+                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+        </div>
+    </div>
+    <!-- end cssload-loader -->
+
+    <!--======================================
+        START HEADER AREA
+    ======================================-->
     <?php include 'header.php'; ?>
 
     <!--======================================
-        START HERO AREA
+        END HERO AREA
 ======================================-->
-    <section class="hero-area bg-white shadow-sm overflow-hidden pt-60px">
-        <span class="stroke-shape stroke-shape-1"></span>
-        <span class="stroke-shape stroke-shape-2"></span>
-        <span class="stroke-shape stroke-shape-3"></span>
-        <span class="stroke-shape stroke-shape-4"></span>
-        <span class="stroke-shape stroke-shape-5"></span>
-        <span class="stroke-shape stroke-shape-6"></span>
+
+    <!-- ================================
+         START QUESTION AREA
+================================= -->
+    <section class="question-area pt-80px pb-40px">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="hero-content">
-                        <div class="media media-card align-items-center shadow-none p-0 mb-0 rounded-0 bg-transparent">
-                            <div class="media-img media--img">
-                                <img src="https://ui-avatars.com/api/?name=<?php echo $fullname; ?>" alt="avatar">
-                            </div>
-                            <?php include 'hero-stats.php'; ?>
-                        </div><!-- end media -->
-                    </div><!-- end hero-content -->
-                </div><!-- end col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="hero-btn-box text-right py-3">
-                        <a href="setting.php" class="btn theme-btn theme-btn-outline theme-btn-outline-gray"><i class="la la-gear mr-1"></i> Edit Profile</a>
-                    </div>
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-12">
-                    <?php include 'menu.php'; ?>
-                </div><!-- end col-lg-4 -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </section>
-    <section class="user-details-area pt-30px pb-60px">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="user-profile" role="tabpanel" aria-labelledby="user-profile-tab">
-                            <div class="user-panel-main-bar">
-                                <div class="user-panel mb-30px">
-                                    <p class="pb-2"><?php echo $userbio; ?></p>
+                <div class="col-lg-2">
+                    <div class="sidebar pb-45px position-sticky top-0 mt-2">
+                        <?php include 'menu.php'; ?>
+                    </div><!-- end sidebar -->
+                </div><!-- end col-lg-2 -->
+                <div class="col-lg-10">
+                    <div class="question-tabs mb-50px">
+                        <ul class="nav nav-tabs generic-tabs justify-content-center" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <div class="anim-bar"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="questions-tab" data-toggle="tab" href="#questions" role="tab" aria-controls="questions" aria-selected="true">Admin Secure Account</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-40px" id="myTabContent">
+                            <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
+                                <div class="filters d-flex align-items-center justify-content-between pb-4">
+
+
+                                </div><!-- end filters -->
+                                <div class="question-main-bar">
+                                    <div class="questions-snippet">
+                                    <div class="user-panel mb-30px">
+                                     
 
                                 </div><!-- end user-panel -->
 
@@ -119,28 +131,7 @@ if (isset($_GET['updateemail'])) {
                                 }
                                 
                                 ?>
-                                <form method="post" class="card-body" action="">
-                                    <?php
-                                    if (isset($_POST['submitquiz'])) {
-                                        require 'functions/edit-profile.php';
-                                    }
-                                    ?>
-                                    <?php echo $message; ?>
-                                    <div class="input-box">
-                                        <label class="fs-14 text-black fw-medium mb-0">Update Bio</label>
-                                        <div class="form-group">
-                                            <textarea class="form-control form--control user-text-editor" rows="3" cols="40" name="update_bio"><?php echo $update_bio; ?></textarea>
-                                            <div class="d-flex align-items-center pt-2">
-                                            </div>
-                                        </div>
-                                    </div><!-- end input-box -->
-                                    <div class="input-box pt-2">
-
-                                        <div class="btn-box">
-                                            <button type="submit" class="btn theme-btn" name="submitquiz">Update Bio</button>
-                                        </div>
-                                    </div>
-                                </form>
+                              
                                 <hr>
                                 <form method="post" class="card-body" action="">
                                     <?php
@@ -249,18 +240,21 @@ if (isset($_GET['updateemail'])) {
                                     </div>
                                 </form>
                                 <hr>
-                            </div><!-- end user-panel-main-bar -->
-                        </div><!-- end tab-pane -->
+                                    </div><!-- end questions-snippet -->
 
-                    </div>
-                </div><!-- end col-lg-9 -->
+                                </div><!-- end question-main-bar -->
+                            </div><!-- end tab-pane -->
+
+                        </div><!-- end tab-content -->
+                    </div><!-- end question-tabs -->
+                </div><!-- end col-lg-7 -->
 
             </div><!-- end row -->
         </div><!-- end container -->
-    </section><!-- end user-details-area -->
-    <!--======================================
-        END HERO AREA
-======================================-->
+    </section><!-- end question-area -->
+    <!-- ================================
+         END QUESTION AREA
+================================= -->
 
 
     <?php include 'footer.php'; ?>
@@ -283,6 +277,25 @@ if (isset($_GET['updateemail'])) {
     <script src="../js/owl.carousel.min.js"></script>
     <script src="../js/selectize.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
+            });
+        });
+    </script>
+
+
+
 </body>
 
 </html>

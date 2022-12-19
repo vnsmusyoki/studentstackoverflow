@@ -20,7 +20,7 @@
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
                         <li><a href="sign-up.php">Sign Up</a></li>
                         <li><a href="sign-in.php">Sign In</a></li>
-                        <li><a href="sign-in.php">My Posts</a></li>
+                        <li><a href="feedback.php">Give Feedback</a></li>
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
@@ -29,7 +29,7 @@
                     <h3 class="fs-18 fw-bold pb-2 text-white">Help</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
                         <li><a href="index.php">Knowledge Base</a></li>
-                        <li><a href="feedback.php">Support</a></li>
+                        <li><a href="feedback.php">Give Feedback</a></li>
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
