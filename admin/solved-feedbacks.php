@@ -88,7 +88,7 @@ $message = $description = '';
                                 <div class="question-main-bar">
                                     <div class="questions-snippet">
                                         <?php
-                                        $responsecheck = "pending";
+                                        $responsecheck = "solved";
                                         $addstudent = "SELECT * FROM `feedback` WHERE `status` = ?";
                                         $checkadd = $conn->prepare($addstudent);
                                         $checkadd->execute([$responsecheck]);
@@ -227,35 +227,7 @@ $message = $description = '';
                         
                         ";
 
-                                        ?>
-
-                                                <form method="post" class="card-body" action="" enctype="multipart/form-data">
-                                                    <?php
-                                                    if (isset($_POST['submitquiz'])) {
-                                                        require 'functions/add-response.php';
-                                                    }
-                                                    ?>
-                                                    <?php echo $message; ?>
-                                                    <input type="hidden" name="quiz_id" value="<?php echo $postid; ?>">
-
-                                                    <div class="input-box">
-                                                        <label class="fs-14 text-black fw-medium mb-0">Send Response</label>
-                                                        <div class="form-group">
-                                                            <textarea class="form-control form--control user-text-editor" rows="2" cols="40" name="question_description"><?php echo $description; ?></textarea>
-                                                            <div class="d-flex align-items-center pt-2">
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- end input-box -->
-
-                                                    <div class="input-box pt-2">
-
-                                                        <div class="btn-box">
-                                                            <button type="submit" class="btn theme-btn" name="submitquiz">Publish your question</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
-                                        <?php
+                                        
                                             }
                                         }
                                         ?>

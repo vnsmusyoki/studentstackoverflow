@@ -154,6 +154,9 @@ require('admin-account.php');
                                             <a href='delete-question-answers.php?quiz=$quizid'>
                                             <span class='pr-1 badge badge-danger '>Delete Thread</span> 
                                             </a>
+                                            <a href='edit-question.php?quiz=$quizid'>
+                                            <span class='pr-1 badge badge-success '>Edit Question</span> 
+                                            </a>
                                         </div>
                                     </div>
                                     <p>$quizdesc</p>

@@ -141,6 +141,9 @@ $message = $description = $question = $category = '';
                                             <a href='delete-question-answers.php?quiz=$quizid'>
                                             <span class='pr-1 badge badge-danger '>Delete Thread</span> 
                                             </a>
+                                            <a href='edit-question.php?quiz=$quizid'>
+                                            <span class='pr-1 badge badge-danger '>Delete Thread</span> 
+                                            </a>
                                         </div>
                                     </div>
                                     <p>$quizdesc</p>

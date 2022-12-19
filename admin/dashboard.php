@@ -32,6 +32,10 @@ require('admin-account.php');
     <script src="../assets/js/jquery-3.3.1.min.js"></script>
     <script src="../assets/js/toastr.min.js"></script>
     <script src="../assets/js/toastr-options.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
+
     <!-- end inject -->
 </head>
 
@@ -51,7 +55,7 @@ require('admin-account.php');
         START HEADER AREA
     ======================================-->
     <?php include 'header.php'; ?>
-  
+
     <!--======================================
         END HERO AREA
 ======================================-->
@@ -64,7 +68,7 @@ require('admin-account.php');
             <div class="row">
                 <div class="col-lg-2">
                     <div class="sidebar pb-45px position-sticky top-0 mt-2">
-                    <?php include 'menu.php'; ?>
+                        <?php include 'menu.php'; ?>
                     </div><!-- end sidebar -->
                 </div><!-- end col-lg-2 -->
                 <div class="col-lg-10">
@@ -81,12 +85,56 @@ require('admin-account.php');
                         <div class="tab-content pt-40px" id="myTabContent">
                             <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
                                 <div class="filters d-flex align-items-center justify-content-between pb-4">
-                                 
+
 
                                 </div><!-- end filters -->
                                 <div class="question-main-bar">
                                     <div class="questions-snippet">
-                                       
+                                        <table class="table table-bordered" id="example">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th> 
+                                                    <th>Full Name</th>
+                                                    <th>Email Address</th>
+                                                    <th>Username</th>
+                                                    <th>Date Joined</th>
+                                                    <th>Bio</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $addstudent = "SELECT * FROM `users`";
+                                                $checkadd = $conn->prepare($addstudent);
+                                                $checkadd->execute();
+                                                $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
+                                                if (count($result) > 0) {
+                                                    foreach ($result as $row) {
+                                                        $fullname = $row['full_names'];
+                                                        $userid = $row['id'];
+                                                        $email = $row['email'];
+                                                        $username = $row['username'];
+                                                        $category = $row['category'];
+                                                        $date = $row['date_joined'];
+                                                        $bio = $row['bio'];
+
+                                                        echo "
+                                                        
+                                                            <tr>
+                                                                <td>$userid</td>
+                                                                <td>$fullname</td>
+                                                                <td>$email</td>
+                                                                <td>$username</td> 
+                                                                <td>$date</td>
+                                                                <td>$bio</td>
+                                                                <td><a href='delete-user.php?id=$userid'>Delete</a></td>
+                                                            </tr>
+                                                        ";
+                                                    }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div><!-- end questions-snippet -->
 
                                 </div><!-- end question-main-bar -->
@@ -124,6 +172,25 @@ require('admin-account.php');
     <script src="../js/owl.carousel.min.js"></script>
     <script src="../js/selectize.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
+            });
+        });
+    </script>
+
+
+
 </body>
 
 </html>

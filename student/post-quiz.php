@@ -3,7 +3,7 @@
 require('student-account.php');
 ?>
 <?php
-$message = $description = $question = $category = ''; 
+$message = $description = $question = $category = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,11 +185,11 @@ $message = $description = $question = $category = '';
                                 </div>
                             </div><!-- end input-box -->
                             <div class="input-box">
-                        <label class="fs-14 text-black fw-medium mb-0"> Question Image</label>
-                        <div class="form-group">
-                            <input class="form-control form--control" name="answer_image" type="file">
-                        </div>
-                    </div><!-- end input-box -->
+                                <label class="fs-14 text-black fw-medium mb-0"> Question Image</label>
+                                <div class="form-group">
+                                    <input class="form-control form--control" name="answer_image" type="file">
+                                </div>
+                            </div><!-- end input-box -->
                             <div class="input-box">
                                 <label class="fs-14 text-black fw-medium mb-0">Category</label>
                                 <p class="fs-13 pb-3 lh-20">Please choose the appropriate section so the question can be searched easily.</p>
@@ -206,7 +206,7 @@ $message = $description = $question = $category = '';
                                             foreach ($result as $row) {
 
                                                 $category = $row['category_name'];
-                                                $catid = $row['id']; 
+                                                $catid = $row['id'];
                                                 echo '<option value="' . $catid . '">' . $category . '</option>';
                                             }
                                         }
