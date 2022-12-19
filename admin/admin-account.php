@@ -13,7 +13,9 @@ if (!isset($_SESSION['admin'])) {
     } else {
         $fullname = $user['full_names'];
         $email = $user['email'];
+        $userid = $user['id']; 
         $datejoined = $user['date_joined'];
-        global $fullname, $email, $datejoined;
+        global $fullname, $email, $datejoined; 
+        global $userid;
     }
 }

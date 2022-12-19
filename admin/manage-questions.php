@@ -86,46 +86,46 @@ require('admin-account.php');
                                 </div><!-- end filters -->
                                 <div class="question-main-bar">
                                     <div class="questions-snippet">
-                                        
-                                            <?php
-                                            $addstudent = "SELECT * FROM `questions`";
-                                            $checkadd = $conn->prepare($addstudent);
-                                            $checkadd->execute();
-                                            $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
-                                            if (count($result) > 0) {
-                                                foreach ($result as $row) {
-                                                    $quiztitle = $row['question_title'];
-                                                    $quizid = $row['id'];
-                                                    $categoryid = $row['category_id'];
-                                                    $quizdesc = $row['description'];
-                                                    $quizpostedby = $row['posted_by'];
-                                                    $quizdate = $row['date_uploaded'];
-                                                    $postimage = $row['image'];
-                                                    $checkuser = "SELECT * FROM `users` WHERE `id`=?";
-                                                    $queryuser = $conn->prepare($checkuser);
-                                                    $queryuser->execute([$quizpostedby]);
-                                                    $quizresult = $queryuser->fetch();
-                                                    $postedby = $quizresult['full_names'];
 
-                                                    $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
-                                                    $querycategory = $conn->prepare($checkcategory);
-                                                    $querycategory->execute([$categoryid]);
-                                                    $categoryresult = $querycategory->fetch();
-                                                    $categoryname = $categoryresult['category_name'];
+                                        <?php
+                                        $addstudent = "SELECT * FROM `questions`";
+                                        $checkadd = $conn->prepare($addstudent);
+                                        $checkadd->execute();
+                                        $result = $checkadd->fetchAll(PDO::FETCH_ASSOC);
+                                        if (count($result) > 0) {
+                                            foreach ($result as $row) {
+                                                $quiztitle = $row['question_title'];
+                                                $quizid = $row['id'];
+                                                $categoryid = $row['category_id'];
+                                                $quizdesc = $row['description'];
+                                                $quizpostedby = $row['posted_by'];
+                                                $quizdate = $row['date_uploaded'];
+                                                $postimage = $row['image'];
+                                                $checkuser = "SELECT * FROM `users` WHERE `id`=?";
+                                                $queryuser = $conn->prepare($checkuser);
+                                                $queryuser->execute([$quizpostedby]);
+                                                $quizresult = $queryuser->fetch();
+                                                $postedby = $quizresult['full_names'];
 
-                                                    $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
-                                                    $queryanswers = $conn->prepare($checkanswers);
-                                                    $queryanswers->execute([$quizid]);
-                                                    $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
-                                                    $answercount = count($queryresult);
-                                                    echo "
+                                                $checkcategory = "SELECT * FROM `categories` WHERE `id`=?";
+                                                $querycategory = $conn->prepare($checkcategory);
+                                                $querycategory->execute([$categoryid]);
+                                                $categoryresult = $querycategory->fetch();
+                                                $categoryname = $categoryresult['category_name'];
+
+                                                $checkanswers = "SELECT * FROM `question_answers` WHERE `quiz_id` = ?";
+                                                $queryanswers = $conn->prepare($checkanswers);
+                                                $queryanswers->execute([$quizid]);
+                                                $queryresult = $queryanswers->fetchAll(PDO::FETCH_ASSOC);
+                                                $answercount = count($queryresult);
+                                                echo "
                         <div class='row'>
                         <div class='col-lg-4'>
                         ";
-                                                    if (!empty($postimage)) {
-                                                        echo "<img  class='img-fluid' src='../quiz_images/$postimage' >";
-                                                    }
-                                                    echo "
+                                                if (!empty($postimage)) {
+                                                    echo "<img  class='img-fluid' src='../quiz_images/$postimage' >";
+                                                }
+                                                echo "
                         </div>
                         <div class='col-lg-8'>
                     <div class='question-main-bar mb-50px'>
@@ -167,11 +167,11 @@ require('admin-account.php');
                 </div>
                         
                         ";
-                                                }
                                             }
-                                            ?>
+                                        }
+                                        ?>
 
-                                        
+
                                     </div><!-- end questions-snippet -->
 
                                 </div><!-- end question-main-bar -->
