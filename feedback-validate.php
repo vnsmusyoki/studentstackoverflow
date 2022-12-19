@@ -35,7 +35,7 @@ toastr.error('Incorrect email address. Provide a valid one.');
         if($checkusername){
             $userid = $checkusername['id'];
             $status = "pending";
-            $addstudent = "INSERT INTO feedback (`title`, `message`,`email`, `status`) VALUES(?,?,?, ?)";
+            $addstudent = "INSERT INTO feedback (`title`, `message`,`user_id`, `status`) VALUES(?,?,?, ?)";
             $checkadd = $conn->prepare($addstudent);
             $queryadd = $checkadd->execute([$title, $description, $userid, $status]);
 

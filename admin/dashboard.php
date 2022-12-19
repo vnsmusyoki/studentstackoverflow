@@ -11,7 +11,7 @@ require('admin-account.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Student | Dashboard</title>
+    <title>Admin Stack Overflow </title>
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -27,54 +27,81 @@ require('admin-account.php');
     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
     <link rel="stylesheet" href="../css/selectize.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/toastr-btn.css">
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/toastr.min.js"></script>
-    <script src="assets/js/toastr-options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../assets/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/toastr-btn.css">
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/toastr.min.js"></script>
+    <script src="../assets/js/toastr-options.js"></script>
     <!-- end inject -->
 </head>
 
 <body>
 
-    <?php include 'header.php'; ?>
+    <!-- start cssload-loader -->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="spinner" viewBox="0 0 50 50">
+                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+        </div>
+    </div>
+    <!-- end cssload-loader -->
 
     <!--======================================
-        START HERO AREA
-======================================-->
-    <section class="hero-area bg-white shadow-sm overflow-hidden pt-60px">
-        <span class="stroke-shape stroke-shape-1"></span>
-        <span class="stroke-shape stroke-shape-2"></span>
-        <span class="stroke-shape stroke-shape-3"></span>
-        <span class="stroke-shape stroke-shape-4"></span>
-        <span class="stroke-shape stroke-shape-5"></span>
-        <span class="stroke-shape stroke-shape-6"></span>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="hero-content">
-                        <div class="media media-card align-items-center shadow-none p-0 mb-0 rounded-0 bg-transparent">
-                            <div class="media-img media--img">
-                                <img src="https://ui-avatars.com/api/?name=<?php echo $fullname; ?>" alt="avatar">
-                            </div>
-                            <?php include 'hero-stats.php'; ?>
-                        </div><!-- end media -->
-                    </div><!-- end hero-content -->
-                </div><!-- end col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="hero-btn-box text-right py-3">
-                        <a href="setting.php" class="btn theme-btn theme-btn-outline theme-btn-outline-gray"><i class="la la-gear mr-1"></i> Edit Profile</a>
-                    </div>
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-12">
-                    <?php include 'menu.php'; ?>
-                </div><!-- end col-lg-4 -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </section>
+        START HEADER AREA
+    ======================================-->
+    <?php include 'header.php'; ?>
+  
     <!--======================================
         END HERO AREA
 ======================================-->
+
+    <!-- ================================
+         START QUESTION AREA
+================================= -->
+    <section class="question-area pt-80px pb-40px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="sidebar pb-45px position-sticky top-0 mt-2">
+                    <?php include 'menu.php'; ?>
+                    </div><!-- end sidebar -->
+                </div><!-- end col-lg-2 -->
+                <div class="col-lg-10">
+                    <div class="question-tabs mb-50px">
+                        <ul class="nav nav-tabs generic-tabs justify-content-center" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <div class="anim-bar"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="questions-tab" data-toggle="tab" href="#questions" role="tab" aria-controls="questions" aria-selected="true">Dashboard</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-40px" id="myTabContent">
+                            <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
+                                <div class="filters d-flex align-items-center justify-content-between pb-4">
+                                 
+
+                                </div><!-- end filters -->
+                                <div class="question-main-bar">
+                                    <div class="questions-snippet">
+                                       
+                                    </div><!-- end questions-snippet -->
+
+                                </div><!-- end question-main-bar -->
+                            </div><!-- end tab-pane -->
+
+                        </div><!-- end tab-content -->
+                    </div><!-- end question-tabs -->
+                </div><!-- end col-lg-7 -->
+
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end question-area -->
+    <!-- ================================
+         END QUESTION AREA
+================================= -->
 
 
     <?php include 'footer.php'; ?>

@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-3 responsive-column-half">
                 <div class="footer-item">
-                    <h3 class="fs-18 fw-bold pb-2 text-white">Student</h3>
+                    <h3 class="fs-18 fw-bold pb-2 text-white">Admin</h3>
                     <ul class="generic-list-item generic-list-item-hover-underline pt-3 generic-list-item-white">
                         <li><a href="sign-in.php">My Profile</a></li> 
                         <li><a href="dashboard.php">My Account</a></li>
